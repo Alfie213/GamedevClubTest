@@ -80,7 +80,7 @@ public class InventoryUI : MonoBehaviour
                 //     default:
                 //         throw new ArgumentException("Unknown type of item.");
                 // }
-                temp.GetComponent<ItemBase>().SetItemData(cell.Data.ItemData);
+                temp.GetComponent<Item>().SetItemData(cell.Data.ItemData);
             }
             else
             {

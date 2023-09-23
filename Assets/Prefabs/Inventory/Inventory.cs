@@ -14,12 +14,12 @@ public class Inventory
 
     private void Init()
     {
-        ItemBase.OnTake += TryAdd;
+        Item.OnTake += TryAdd;
     }
 
     private void DeInit()
     {
-        ItemBase.OnTake -= TryAdd;
+        Item.OnTake -= TryAdd;
     }
 
     public Inventory(InventoryData inventoryData)
@@ -38,36 +38,36 @@ public class Inventory
     }
 
     /// <summary>
-    /// Trying to add itemBase in inventory.
+    /// Trying to add item in inventory.
     /// </summary>
-    private void TryAdd(ItemBase itemBase, out bool added)
+    private void TryAdd(Item item, out bool added)
     {
-        if (!TryChangeAmount(itemBase) && !TryPut(itemBase))
+        if (!TryChangeAmount(item) && !TryPut(item))
         {
-            Debug.LogWarning("There are no space for this itemBase!");
+            Debug.LogWarning("There are no space for this item!");
             added = false;
             return;
         }
-        itemsTypes.Add(itemBase.GetType());
+        itemsTypes.Add(item.GetType());
         added = true;
     }
 
     /// <summary>
-    /// Trying to change amount of itemBase in existing cell instead of occupation of free cell.
+    /// Trying to change amount of item in existing cell instead of occupation of free cell.
     /// </summary>
-    private bool TryChangeAmount(ItemBase itemBase)
+    private bool TryChangeAmount(Item item)
     {
-        if (itemBase.ItemData.Stackable)
+        if (item.ItemData.Stackable)
         {
-            if (itemsTypes.Contains(itemBase.GetType()))
+            if (itemsTypes.Contains(item.GetType()))
             {
                 foreach (CellInventory cell in Cells)
                 {
-                    if (cell.Data.Type == itemBase.ItemData.Type)
+                    if (cell.Data.Type == item.ItemData.Type)
                     {
                         if (!cell.IsFull)
                         {
-                            cell.Add(itemBase);
+                            cell.Add(item);
                             //Debug.Log("Changed amount.");
                             return true;
                         }
@@ -79,15 +79,15 @@ public class Inventory
     }
 
     /// <summary>
-    /// Trying to find free cell in inventory and put an ItemBase there.
+    /// Trying to find free cell in inventory and put an Item there.
     /// </summary>
-    private bool TryPut(ItemBase itemBase)
+    private bool TryPut(Item item)
     {
         foreach (var cell in Cells)
         {
             if (cell.Data.Type == null) // just check data is null
             {
-                cell.Add(itemBase);
+                cell.Add(item);
                 //Debug.Log("Added without changing amount.");
                 return true;
             }
@@ -96,18 +96,18 @@ public class Inventory
     }
 
     /// <summary>
-    /// Removes itemBase from inventory.
+    /// Removes item from inventory.
     /// </summary>
-    //public void Remove(ItemBase itemBase) // Work not guaranteed!
+    //public void Remove(Item item) // Work not guaranteed!
     //{
-    //    if (itemsTypes.Contains(itemBase.GetType()))
+    //    if (itemsTypes.Contains(item.GetType()))
     //    {
     //        foreach (CellInventory cell in cells)
     //        {
-    //            if (cell.ItemType == itemBase.GetType())
+    //            if (cell.ItemType == item.GetType())
     //            {
     //                cell.Subtract();
-    //                if (cell.IsEmpty) itemsTypes.Remove(itemBase.GetType());
+    //                if (cell.IsEmpty) itemsTypes.Remove(item.GetType());
     //                return;
     //            }
     //        }

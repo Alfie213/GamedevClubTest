@@ -18,20 +18,19 @@ public class CellInventory
         Data = data;
     }
     
-    public void Add(ItemBase itemBase)
+    public void Add(Item item)
     {
         if (Data.CurrentAmount == 0)
         {
-            Init(itemBase);
+            Init(item);
         }
         Data.CurrentAmount++;
     }
 
-    private void Init(ItemBase itemBase)
+    private void Init(Item item)
     {
-        Data.Type = itemBase.ItemData.Type;
-        Data.ItemData = itemBase.ItemData;
-        maxAmount = itemBase.ItemData.MaxAmount;
+        Data.Type = item.ItemData.Type;
+        Data.ItemData = item.ItemData;
     }
 
     private void DeInit()
