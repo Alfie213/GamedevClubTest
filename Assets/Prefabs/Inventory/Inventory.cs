@@ -30,7 +30,7 @@ public class Inventory
         Cells = new CellInventory[data.Cells.Length];
         for (int i = 0; i < Cells.Length; i++)
         {
-            Cells[i] = new CellInventory(data.Cells[i]);
+            Cells[i] = new CellInventory(data.Cells[i]) ?? new CellInventory();
         }
         itemsTypes = new List<Type>();
         

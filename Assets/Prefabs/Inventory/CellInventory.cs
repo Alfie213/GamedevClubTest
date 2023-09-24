@@ -3,7 +3,7 @@ using UnityEngine;
 public class CellInventory
 {
     // Public properties.
-    public bool IsEmpty => Data.ItemData is null;
+    public bool IsEmpty => Data is null;
     
     public bool IsFull => Data.CurrentAmount == maxAmount;
     
@@ -13,6 +13,11 @@ public class CellInventory
     // Private variables.
     private int maxAmount = 1;
 
+    public CellInventory()
+    {
+        Data = null;
+    }
+    
     public CellInventory(CellInventoryData data)
     {
         Data = data;
