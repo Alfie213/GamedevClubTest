@@ -6,7 +6,7 @@ public class Inventory
 {
     public CellInventory[] Cells { get; }
 
-    private readonly List<Type> itemsTypes;
+    private readonly HashSet<ItemData.ItemType> itemsTypes;
     
     //test
     private InventoryData data;
@@ -32,7 +32,13 @@ public class Inventory
         {
             Cells[i] = new CellInventory(data.Cells[i]) ?? new CellInventory();
         }
-        itemsTypes = new List<Type>();
+        
+        itemsTypes = new HashSet<ItemData.ItemType>();
+        foreach (CellInventory cell in Cells)
+        {
+            if (!cell.IsEmpty)
+                itemsTypes.Add(cell.Data.Type);
+        }
         
         Init();
     }
@@ -48,7 +54,7 @@ public class Inventory
             added = false;
             return;
         }
-        itemsTypes.Add(item.GetType());
+        itemsTypes.Add(item.ItemData.Type);
         added = true;
     }
 
@@ -59,7 +65,7 @@ public class Inventory
     {
         if (item.ItemData.Stackable)
         {
-            if (itemsTypes.Contains(item.GetType()))
+            if (itemsTypes.Contains(item.ItemData.Type))
             {
                 foreach (CellInventory cell in Cells)
                 {
