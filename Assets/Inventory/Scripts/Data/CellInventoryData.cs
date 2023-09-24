@@ -9,4 +9,12 @@ public class CellInventoryData : ScriptableObject
     public ItemData.ItemType Type;
     public int CurrentAmount;
     public int MaxAmount;
+
+    private void Reset()
+    {
+        ItemData = null;
+        Type = ItemData.ItemType.None;
+        CurrentAmount = 0;
+        MaxAmount = 0;
+    }
 }
