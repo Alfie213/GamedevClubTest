@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c99a64551decb924a8a347a2efe9f151, type: 3}
-  m_Name: CellInventoryData
+  m_Name: CellInventoryData 12
   m_EditorClassIdentifier: 
-  ItemData: {fileID: 11400000, guid: 29a418b6e34bd7e498415bdbf74a3f30, type: 2}
+  ItemData: {fileID: 0}
   Type: 0
-  CurrentAmount: 2
+  CurrentAmount: 0
