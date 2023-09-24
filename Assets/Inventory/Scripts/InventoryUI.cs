@@ -86,10 +86,9 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                Instantiate(emptyCell, this.transform);
+                Instantiate(emptyCell, transform);
             }
         }
-        cellSample.GetComponentInChildren<TextMeshProUGUI>().text = "8";
     }
     
     /// <summary>
