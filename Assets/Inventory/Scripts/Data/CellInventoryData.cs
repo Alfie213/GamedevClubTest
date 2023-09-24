@@ -8,4 +8,5 @@ public class CellInventoryData : ScriptableObject
     public ItemData ItemData;
     public ItemData.ItemType Type;
     public int CurrentAmount;
+    public int MaxAmount;
 }

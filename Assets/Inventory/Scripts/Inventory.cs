@@ -30,14 +30,14 @@ public class Inventory
         Cells = new CellInventory[data.Cells.Length];
         for (int i = 0; i < Cells.Length; i++)
         {
-            Cells[i] = new CellInventory(data.Cells[i]) ?? new CellInventory();
+            Cells[i] = new CellInventory(data.Cells[i]);
         }
         
         itemsTypes = new HashSet<ItemData.ItemType>();
-        foreach (CellInventory cell in Cells)
+        foreach (CellInventoryData cell in inventoryData.Cells)
         {
             if (!cell.IsEmpty)
-                itemsTypes.Add(cell.Data.Type);
+                itemsTypes.Add(cell.Type);
         }
         
         Init();
@@ -63,13 +63,10 @@ public class Inventory
     /// </summary>
     private bool TryChangeAmount(Item item)
     {
-        // Debug.Log("1");
         if (item.ItemData.Stackable)
         {
-            // Debug.Log("2");
             if (itemsTypes.Contains(item.ItemData.Type))
             {
-                // Debug.Log("3");
                 foreach (CellInventory cell in Cells)
                 {
                     if (cell.Data.Type == item.ItemData.Type)
@@ -77,7 +74,7 @@ public class Inventory
                         if (!cell.IsFull)
                         {
                             cell.Add(item);
-                            //Debug.Log("Changed amount.");
+                            // Debug.Log("Changed amount.");
                             return true;
                         }
                     }
@@ -94,10 +91,10 @@ public class Inventory
     {
         foreach (var cell in Cells)
         {
-            if (cell.Data.IsEmpty) // just check data is null
+            if (cell.IsEmpty)
             {
                 cell.Add(item);
-                //Debug.Log("Added without changing amount.");
+                // Debug.Log("Added without changing amount.");
                 return true;
             }
         }
