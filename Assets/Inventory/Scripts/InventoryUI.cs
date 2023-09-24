@@ -35,6 +35,9 @@ public class InventoryUI : MonoBehaviour
                 cellSample.GetComponentInChildren<Image>().sprite = cell.Data.ItemData.Sprite;
                 cellSample.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(cell.Data.CurrentAmount);
                 GameObject temp = Instantiate(cellSample, this.transform);
+
+                if (cell.Data.CurrentAmount == 1)
+                    temp.GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
                 // switch (cell.Data.Type)
                 // {
                 //     case ItemData.ItemType.IntelligenceBook:
