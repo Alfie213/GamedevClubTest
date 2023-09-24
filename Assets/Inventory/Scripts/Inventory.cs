@@ -63,10 +63,13 @@ public class Inventory
     /// </summary>
     private bool TryChangeAmount(Item item)
     {
+        // Debug.Log("1");
         if (item.ItemData.Stackable)
         {
+            // Debug.Log("2");
             if (itemsTypes.Contains(item.ItemData.Type))
             {
+                // Debug.Log("3");
                 foreach (CellInventory cell in Cells)
                 {
                     if (cell.Data.Type == item.ItemData.Type)
@@ -91,7 +94,7 @@ public class Inventory
     {
         foreach (var cell in Cells)
         {
-            if (cell.Data.Type == null) // just check data is null
+            if (cell.Data.IsEmpty) // just check data is null
             {
                 cell.Add(item);
                 //Debug.Log("Added without changing amount.");
