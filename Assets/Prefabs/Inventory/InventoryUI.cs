@@ -24,8 +24,10 @@ public class InventoryUI : MonoBehaviour
         InstantiateInventoryUI();
     }
 
-    public void InstantiateInventoryUI()
+    private void InstantiateInventoryUI()
     {
+        ClearInventoryUI();
+        
         foreach (CellInventory cell in inventory.Cells)
         {
             if (!cell.IsEmpty)
@@ -88,5 +90,19 @@ public class InventoryUI : MonoBehaviour
             }
         }
         cellSample.GetComponentInChildren<TextMeshProUGUI>().text = "8";
+    }
+    
+    /// <summary>
+    /// Clears all inventory UI.
+    /// </summary>
+    private void ClearInventoryUI()
+    {
+        Transform[] children = GetComponentsInChildren<Transform>();
+
+        // Starting from 1 to avoid self deleting.
+        for (int i = 1; i < children.Length; i++)
+        {
+            Destroy(children[i].gameObject);
+        }
     }
 }
