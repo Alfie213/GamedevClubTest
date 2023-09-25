@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(EnemyHealth), typeof(Collider2D))]
+[RequireComponent(typeof(EnemyHealth), typeof(Collider2D), typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float speed;
+    
     private EnemyHealth health;
     private Collider2D col;
 
@@ -14,7 +17,7 @@ public class Enemy : MonoBehaviour
         
         InitCollider();
 
-        movement = GetComponentInChildren<NavMeshMovement>();
+        movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>());
     }
 
     private void InitCollider()

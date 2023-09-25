@@ -1,21 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class NavMeshMovement : MonoBehaviour
+public class NavMeshMovement
 {
-    [SerializeField] private float speed;
-    
+    private readonly float speed;
     private NavMeshAgent agent;
-    
-    private void Awake()
+
+    public NavMeshMovement(float speed, NavMeshAgent navMeshAgent)
     {
-        InitAgent();
+        this.speed = speed;
+        
+        InitNavMeshAgent(navMeshAgent);
     }
 
-    private void InitAgent()
+    private void InitNavMeshAgent(NavMeshAgent navMeshAgent)
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = navMeshAgent;
 
         agent.speed = speed;
         agent.autoBraking = false;
