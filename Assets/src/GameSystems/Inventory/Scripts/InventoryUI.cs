@@ -30,6 +30,12 @@ public class InventoryUI : MonoBehaviour
         InstantiateInventoryUI();
     }
 
+    private void OnDisable()
+    {
+        cellsUi.Clear();
+        EventBus.InventoryUiOnDisable.Publish();
+    }
+
     public Vector3 GetCellUiPosition(int index)
     {
         return cellsUi[index].GetComponent<RectTransform>().position;
