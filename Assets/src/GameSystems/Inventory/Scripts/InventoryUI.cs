@@ -1,20 +1,26 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField] private GameObject cellSample;
     [SerializeField] private GameObject emptyCell;
 
-    private Inventory inventory;
-    
+    [Header("InventoryData")]
     [SerializeField] private InventoryData data;
+    
+    private Inventory inventory;
+    private List<GameObject> cellsUi;
 
     private void Awake()
     {
         inventory = new Inventory(data);
+        cellsUi = new List<GameObject>();
+        
         gameObject.SetActive(false);
     }
 
@@ -24,68 +30,29 @@ public class InventoryUI : MonoBehaviour
         InstantiateInventoryUI();
     }
 
+    public Vector3 GetCellUiPosition(int index)
+    {
+        return cellsUi[index].GetComponent<RectTransform>().position;
+    }
+    
     private void InstantiateInventoryUI()
     {
         ClearInventoryUI();
-        
-        foreach (CellInventory cell in inventory.Cells)
-        {
-            if (!cell.IsEmpty)
-            {
-                cellSample.GetComponentInChildren<Image>().sprite = cell.Data.ItemData.Sprite;
-                cellSample.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(cell.Data.CurrentAmount);
-                GameObject temp = Instantiate(cellSample, this.transform);
 
-                if (cell.Data.CurrentAmount == 1)
+        for (int i = 0; i < inventory.Cells.Length; i++)
+        {
+            if (!inventory.Cells[i].IsEmpty)
+            {
+                int indexOfCell = i;
+                
+                cellSample.GetComponentInChildren<Image>().sprite = inventory.Cells[i].Data.ItemData.Sprite;
+                cellSample.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(inventory.Cells[i].Data.CurrentAmount);
+                GameObject temp = Instantiate(cellSample, this.transform);
+                cellsUi.Add(temp);
+                temp.GetComponent<Button>().onClick.AddListener(() => EventBus.InventoryCellClick.Publish(indexOfCell));
+
+                if (inventory.Cells[i].Data.CurrentAmount == 1)
                     temp.GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
-                // switch (cell.Data.Type)
-                // {
-                //     case ItemData.ItemType.IntelligenceBook:
-                //         temp.AddComponent<IntelligenceBook>();
-                //         break;
-                //     case ItemData.ItemType.StrenghtBook:
-                //         temp.AddComponent<StrenghtBook>();
-                //         break;
-                //     case ItemData.ItemType.Ingredient:
-                //         temp.AddComponent<Ingredient>();
-                //         break;
-                //     case ItemData.ItemType.HealthPotion:
-                //         temp.AddComponent<HealthPotion>();
-                //         break;
-                //     case ItemData.ItemType.ManaPotion:
-                //         temp.AddComponent<ManaPotion>();
-                //         break;
-                //     case ItemData.ItemType.Boomerang:
-                //         temp.AddComponent<Boomerang>();
-                //         break;
-                //     case ItemData.ItemType.BowArrow:
-                //         temp.AddComponent<BowArrow>();
-                //         break;
-                //     case ItemData.ItemType.Cyborg:
-                //         temp.AddComponent<Cyborg>();
-                //         break;
-                //     case ItemData.ItemType.Hat:
-                //         temp.AddComponent<Hat>();
-                //         break;
-                //     case ItemData.ItemType.Kusarigama:
-                //         temp.AddComponent<Kusarigama>();
-                //         break;
-                //     case ItemData.ItemType.Orrery:
-                //         temp.AddComponent<Orrery>();
-                //         break;
-                //     case ItemData.ItemType.Sablya:
-                //         temp.AddComponent<Sablya>();
-                //         break;
-                //     case ItemData.ItemType.Shuriken:
-                //         temp.AddComponent<Shuriken>();
-                //         break;
-                //     case ItemData.ItemType.Sword:
-                //         temp.AddComponent<Sword>();
-                //         break;
-                //     default:
-                //         throw new ArgumentException("Unknown type of item.");
-                // }
-                // temp.GetComponent<Item>().SetItemData(cell.Data.ItemData);
             }
             else
             {
@@ -93,7 +60,7 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// Clears all inventory UI.
     /// </summary>
