@@ -20193,7 +20193,6 @@ GameObject:
   - component: {fileID: 1536971103}
   - component: {fileID: 1536971105}
   - component: {fileID: 1536971102}
-  - component: {fileID: 1536971104}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -20280,6 +20279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f386594ca685ab4cba2019c454040ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
   speed: 5
 --- !u!58 &1536971103
 CircleCollider2D:
@@ -20297,19 +20297,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.53
---- !u!114 &1536971104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536971099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d289bfb71fc92324cbc27e9275375c10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
 --- !u!195 &1536971105
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20701,7 +20688,6 @@ GameObject:
   - component: {fileID: 2013500851}
   - component: {fileID: 2013500850}
   - component: {fileID: 2013500852}
-  - component: {fileID: 2013500853}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20837,19 +20823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 1637142721}
   speed: 5
---- !u!114 &2013500853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013500847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2424da61318c647b34b9983dfba9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
 --- !u!1 &2033952110
 GameObject:
   m_ObjectHideFlags: 0
