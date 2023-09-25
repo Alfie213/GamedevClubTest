@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Collider2D), typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -11,8 +11,6 @@ public class NavMeshMovement : MonoBehaviour
     private void Awake()
     {
         InitAgent();
-        
-        GetComponent<Collider>().isTrigger = true;
     }
 
     private void InitAgent()
