@@ -45,14 +45,14 @@ public class InventoryUI : MonoBehaviour
             {
                 int indexOfCell = i;
                 
-                cellSample.GetComponentInChildren<Image>().sprite = inventory.Cells[i].Data.ItemData.Sprite;
-                cellSample.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(inventory.Cells[i].Data.CurrentAmount);
-                GameObject temp = Instantiate(cellSample, this.transform);
-                cellsUi.Add(temp);
-                temp.GetComponent<Button>().onClick.AddListener(() => EventBus.InventoryCellClick.Publish(indexOfCell));
+                GameObject cellUI = Instantiate(cellSample, transform);
+                cellsUi.Add(cellUI);
+                cellUI.GetComponentInChildren<Image>().sprite = inventory.Cells[i].Data.ItemData.Sprite;
+                cellUI.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(inventory.Cells[i].Data.CurrentAmount);
+                cellUI.GetComponent<Button>().onClick.AddListener(() => EventBus.InventoryCellClick.Publish(indexOfCell));
 
                 if (inventory.Cells[i].Data.CurrentAmount == 1)
-                    temp.GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
+                    cellUI.GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
             }
             else
             {
