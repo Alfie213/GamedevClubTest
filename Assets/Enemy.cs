@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
         InitCollider();
         
         health = new EnemyHealth(maxHp, transform.position);
-        movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>());
+        movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>(), this);
     }
 
     private void InitCollider()
@@ -28,9 +28,9 @@ public class Enemy : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out PlayerHealth playerHealth))
+        if (other.TryGetComponent(out PlayerMovement playerMovement)) // Component may be changed.
         {
-            movement.SetDestination(other.transform.position);
+            movement.SetTarget(other.transform);
         }
     }
 }
