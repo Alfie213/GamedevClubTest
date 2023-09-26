@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHp;
     [SerializeField] private float speed;
     
+    [Header("Player chasing settings")]
+    [SerializeField] private float stoppingDistance;
+    
     private Collider2D col;
 
     private EnemyHealth health;
@@ -17,7 +20,7 @@ public class Enemy : MonoBehaviour
         InitCollider();
         
         health = new EnemyHealth(maxHp, transform.position);
-        movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>(), this);
+        movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>(), stoppingDistance, this);
     }
 
     private void InitCollider()

@@ -4,27 +4,26 @@ using UnityEngine.AI;
 
 public class NavMeshMovement
 {
-    private static readonly WaitForSeconds Delay = new WaitForSeconds(1f);
+    private static readonly WaitForSeconds Delay = new WaitForSeconds(0.5f);
 
-    private readonly float speed;
     private NavMeshAgent agent;
 
     private readonly MonoBehaviour monoBehaviour; // Required for StartCoroutine().
 
-    public NavMeshMovement(float speed, NavMeshAgent navMeshAgent, MonoBehaviour monoBehaviour)
+    public NavMeshMovement(float speed, NavMeshAgent navMeshAgent, float stoppingDistance, MonoBehaviour monoBehaviour)
     {
-        this.speed = speed;
-        
-        InitNavMeshAgent(navMeshAgent);
+        InitNavMeshAgent(navMeshAgent, speed, stoppingDistance);
 
         this.monoBehaviour = monoBehaviour;
     }
 
-    private void InitNavMeshAgent(NavMeshAgent navMeshAgent)
+    private void InitNavMeshAgent(NavMeshAgent navMeshAgent, float speed, float stoppingDistance)
     {
         agent = navMeshAgent;
 
         agent.speed = speed;
+        agent.stoppingDistance = stoppingDistance;
+        
         agent.autoBraking = false;
         agent.updateRotation = false;
         agent.angularSpeed = 0f;
@@ -46,8 +45,8 @@ public class NavMeshMovement
         while (true)
         {
             agent.destination = target.position;
-            if (CheckDestinationReached())
-                yield break;
+            // if (CheckDestinationReached())
+            //     yield break;
 
             yield return Delay;
         }
