@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDeleteWindow : MonoBehaviour
+public class ItemDeleteButton : MonoBehaviour
 {
     [SerializeField] private InventoryUI inventoryUI;
 
