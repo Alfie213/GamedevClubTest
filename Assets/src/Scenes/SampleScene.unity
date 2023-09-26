@@ -21055,8 +21055,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1912244904}
+  - component: {fileID: 1912244905}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: FireTransform
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -21077,6 +21078,18 @@ Transform:
   m_Father: {fileID: 593894165}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1912244905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912244903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c19c30955f631140a20e1f48e5730c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1931082248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2256218751454898981, guid: baf48bc42c3768b40bb5fc949095b64b, type: 3}
@@ -21096,6 +21109,7 @@ GameObject:
   - component: {fileID: 2013500854}
   - component: {fileID: 2013500852}
   - component: {fileID: 2013500853}
+  - component: {fileID: 2013500855}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -21244,6 +21258,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.42}
   m_EdgeRadius: 0
+--- !u!114 &2013500855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013500847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e43f0669db41a4fa1daed5c57fe4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2033952110
 GameObject:
   m_ObjectHideFlags: 0
