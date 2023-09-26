@@ -29,6 +29,7 @@ public class InventoryUI : MonoBehaviour
         //Debug.Log("Inventory enabled");
         InstantiateInventoryUI();
         
+        EventBus.OnItemTake.Subscribe(InstantiateInventoryUI);
         EventBus.InventoryOnClearCell.Subscribe(InstantiateInventoryUI);
     }
 
@@ -36,7 +37,9 @@ public class InventoryUI : MonoBehaviour
     {
         cellsUi.Clear();
         
+        EventBus.OnItemTake.Unsubscribe(InstantiateInventoryUI);
         EventBus.InventoryOnClearCell.Unsubscribe(InstantiateInventoryUI);
+        
         EventBus.InventoryUiOnDisable.Publish();
     }
 

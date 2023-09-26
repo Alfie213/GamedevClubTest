@@ -17,6 +17,7 @@ public class Item : MonoBehaviour
             OnTake.Invoke(this, out added);
             if (added)
             {
+                EventBus.OnItemTake.Publish();
                 Destroy(gameObject);
             }
         }
