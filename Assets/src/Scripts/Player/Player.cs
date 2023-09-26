@@ -3,13 +3,19 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Player : MonoBehaviour
 {
-    private PlayerHealth health;
+    [Header("Health settings")]
+    [SerializeField] private int health;
+    [SerializeField] private HealthBar healthBar;
+    
+    private PlayerHealth playerHealth;
     private Collider2D col;
 
     private void Awake()
     {
-        health = new PlayerHealth(100);
+        playerHealth = new PlayerHealth(health);
         InitCollider();
+        
+        healthBar.SetTrackableHealth(playerHealth);
     }
 
     private void InitCollider()
@@ -18,11 +24,11 @@ public class Player : MonoBehaviour
         col.isTrigger = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        // if (other.TryGetComponent<Bullet>(out Bullet bullet))
-        // {
-        //     health.GetDamage(bullet.BulletData.Damage);
-        // }
+        if (other.TryGetComponent(out Enemy enemy))
+        {
+            playerHealth.GetDamage(enemy.Damage);
+        }
     }
 }

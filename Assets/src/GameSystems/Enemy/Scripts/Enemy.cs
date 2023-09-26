@@ -4,10 +4,12 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Collider2D), typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
+    public int Damage => damage;
     public EnemyHealth Health => health;
     
     [SerializeField] private int maxHp;
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
     
     [Header("Player chasing settings")]
     [SerializeField] private float stoppingDistance;
@@ -47,7 +49,7 @@ public class Enemy : MonoBehaviour
         {
             movement.SetTarget(other.transform);
         }
-        else if (other.TryGetComponent<Projectile>(out Projectile projectile))
+        else if (other.TryGetComponent(out Projectile projectile))
         {
             health.GetDamage(projectile.Damage);
         }
