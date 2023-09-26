@@ -18,6 +18,16 @@ public class Player : MonoBehaviour
         healthBar.SetTrackableHealth(playerHealth);
     }
 
+    private void OnEnable()
+    {
+        playerHealth.OnDeath += Handle_OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        playerHealth.OnDeath -= Handle_OnDeath;
+    }
+
     private void InitCollider()
     {
         col = GetComponent<Collider2D>();
@@ -30,5 +40,10 @@ public class Player : MonoBehaviour
         {
             playerHealth.GetDamage(enemy.Damage);
         }
+    }
+
+    private void Handle_OnDeath()
+    {
+        Destroy(gameObject);
     }
 }
