@@ -20,6 +20,7 @@ public class ItemDeleteButton : MonoBehaviour
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => EventBus.ItemDeleteButtonOnClick.Publish(currentCellIndex));
+        GetComponent<Button>().onClick.AddListener(() => SetEnableGraphics(false));
         
         SetEnableGraphics(false);
     }

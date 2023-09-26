@@ -62,7 +62,8 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                Instantiate(emptyCell, transform);
+                GameObject emptyCellUI = Instantiate(emptyCell, transform);
+                cellsUi.Add(emptyCellUI);
             }
         }
     }
