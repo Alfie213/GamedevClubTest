@@ -48,8 +48,6 @@ public class ItemDeleteButton : MonoBehaviour
         currentCellIndex = indexOfCell;
         transform.position = inventoryUI.GetCellUiPosition(indexOfCell);
         SetEnableGraphics(true);
-        // Тут надо узнать, где находится нужная ячейка и переместить окно удаления на ее место.
-        // При нажатии на кнопку надо обратиться к инвентарю и удалить нужный предмет.
     }
 
     private void Handle_InventoryUiOnDisable()

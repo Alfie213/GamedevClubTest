@@ -26,7 +26,6 @@ public class InventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        //Debug.Log("Inventory enabled");
         InstantiateInventoryUI();
         
         EventBus.OnItemTake.Subscribe(InstantiateInventoryUI);

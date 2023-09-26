@@ -8,9 +8,7 @@ public class Inventory
 
     private readonly HashSet<ItemData.ItemType> itemsTypes;
     
-    //test
     private InventoryData data;
-    //test
 
     private void Init()
     {
@@ -76,7 +74,6 @@ public class Inventory
                         if (!cell.IsFull)
                         {
                             cell.Add(item);
-                            // Debug.Log("Changed amount.");
                             return true;
                         }
                     }
@@ -96,7 +93,6 @@ public class Inventory
             if (cell.IsEmpty)
             {
                 cell.Add(item);
-                // Debug.Log("Added without changing amount.");
                 return true;
             }
         }
@@ -123,7 +119,6 @@ public class Inventory
                 if (cell.Data.Type == item.ItemData.Type)
                 {
                     cell.Clear();
-                    // if (cell.IsEmpty) itemsTypes.Remove(item.GetType()); Need to rebuild logic.
                     return;
                 }
             }
@@ -136,7 +131,6 @@ public class Inventory
     public void ClearCell(int indexOfCell)
     {
         Cells[indexOfCell].Clear();
-        // itemsTypes.Remove(item.GetType()); Need to rebuild logic.
     }
 
     #region Unused Swap
@@ -156,7 +150,6 @@ public class Inventory
     {
         (Cells[firstIndex], Cells[secondIndex]) = (Cells[secondIndex], Cells[firstIndex]);
         (data.Cells[firstIndex], data.Cells[secondIndex]) = (data.Cells[secondIndex], data.Cells[firstIndex]);
-        // Just change order of data (SO). Perfect to not change the order, but to change the values.
     }
 
     /// <summary>
