@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
         if(joystick.JoystickVec.y != 0)
         {
             rb.velocity = new Vector2(joystick.JoystickVec.x * speed, joystick.JoystickVec.y * speed);
+            if (joystick.JoystickVec.x > 0) // Moving right
+                transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            else if (joystick.JoystickVec.x < 0) // Moving left
+                transform.rotation = new Quaternion(0f, 180f, 0f, 0f);
         }
         else
         {
