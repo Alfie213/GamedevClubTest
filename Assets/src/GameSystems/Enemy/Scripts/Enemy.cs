@@ -35,5 +35,10 @@ public class Enemy : MonoBehaviour
         {
             movement.SetTarget(other.transform);
         }
+        else if (other.TryGetComponent<Projectile>(out Projectile projectile))
+        {
+            Debug.Log(projectile.Damage);
+            health.GetDamage(projectile.Damage);
+        }
     }
 }
