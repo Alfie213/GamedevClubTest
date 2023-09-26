@@ -28,11 +28,15 @@ public class InventoryUI : MonoBehaviour
     {
         //Debug.Log("Inventory enabled");
         InstantiateInventoryUI();
+        
+        EventBus.InventoryOnClearCell.Subscribe(InstantiateInventoryUI);
     }
 
     private void OnDisable()
     {
         cellsUi.Clear();
+        
+        EventBus.InventoryOnClearCell.Unsubscribe(InstantiateInventoryUI);
         EventBus.InventoryUiOnDisable.Publish();
     }
 
@@ -80,5 +84,7 @@ public class InventoryUI : MonoBehaviour
         {
             Destroy(children[i].gameObject);
         }
+        
+        cellsUi.Clear();
     }
 }

@@ -175,5 +175,6 @@ public class Inventory
     private void Handle_ItemDeleteButtonOnClick(int indexOfCell)
     {
         ClearCell(indexOfCell);
+        EventBus.InventoryOnClearCell.Publish();
     }
 }
