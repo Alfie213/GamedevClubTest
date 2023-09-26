@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     {
         InitCollider();
         
-        health = new EnemyHealth(maxHp, transform.position);
+        health = new EnemyHealth(maxHp);
         movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>(), stoppingDistance, this);
     }
 
@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void Handle_OnDeath()
     {
+        EventBus.EnemyDeath.Publish(transform.position);
         Destroy(gameObject);
     }
 }
