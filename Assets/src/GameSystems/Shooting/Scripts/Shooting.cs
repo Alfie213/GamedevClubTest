@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    [Header("Shooting customization")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float shootingForce;
+    
+    [Header("Projectile settings")]
+    [SerializeField] private float projectileLifetime;
     [SerializeField] private Transform spawnParent;
     
     private Transform fireTransform;
@@ -31,6 +35,7 @@ public class Shooting : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, fireTransform.position, Quaternion.identity, spawnParent);
         projectile.GetComponent<Rigidbody2D>().AddForce(shootingDirection * shootingForce);
+        Destroy(projectile, projectileLifetime);
     }
 
     private void Handle_PlayerMovesLeft()
