@@ -9,4 +9,6 @@ public static class EventBus
     public static readonly CustomAction<int> ItemDeleteButtonOnClick = new CustomAction<int>();
     public static readonly CustomAction InventoryOnClearCell = new CustomAction();
 
+    public static readonly CustomAction PlayerMovesLeft = new CustomAction();
+    public static readonly CustomAction PlayerMovesRight = new CustomAction();
 }
