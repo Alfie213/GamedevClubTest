@@ -9,6 +9,8 @@ public class ItemDeleteButton : MonoBehaviour
     private Image image;
     private TextMeshProUGUI text;
 
+    private int currentCellIndex;
+
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -17,6 +19,8 @@ public class ItemDeleteButton : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<Button>().onClick.AddListener(() => EventBus.ItemDeleteButtonOnClick.Publish(currentCellIndex));
+        
         SetEnableGraphics(false);
     }
 
@@ -40,6 +44,7 @@ public class ItemDeleteButton : MonoBehaviour
     
     private void Handle_InventoryCellClick(int indexOfCell)
     {
+        currentCellIndex = indexOfCell;
         transform.position = inventoryUI.GetCellUiPosition(indexOfCell);
         SetEnableGraphics(true);
         // Тут надо узнать, где находится нужная ячейка и переместить окно удаления на ее место.

@@ -36,6 +36,11 @@ public class CellInventory
         Data.MaxAmount = 0;
     }
 
+    public void Clear()
+    {
+        DeInit();
+    }
+    
     public bool DecreaseAmount(int amount)
     {
         bool success = false;

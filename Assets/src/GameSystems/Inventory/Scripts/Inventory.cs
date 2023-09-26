@@ -15,11 +15,13 @@ public class Inventory
     private void Init()
     {
         Item.OnTake += TryAdd;
+        EventBus.ItemDeleteButtonOnClick.Subscribe(Handle_ItemDeleteButtonOnClick);
     }
 
     private void DeInit()
     {
         Item.OnTake -= TryAdd;
+        EventBus.ItemDeleteButtonOnClick.Unsubscribe(Handle_ItemDeleteButtonOnClick);
     }
 
     public Inventory(InventoryData inventoryData)
@@ -102,23 +104,40 @@ public class Inventory
     }
 
     /// <summary>
+    /// Decrease item amount in inventory.
+    /// </summary>
+    public bool DecreaseAmount(int indexOfCell, int amount)
+    {
+        return Cells[indexOfCell].DecreaseAmount(amount);
+    }
+    
+    /// <summary>
     /// Removes item from inventory.
     /// </summary>
-    //public void Remove(Item item) // Work not guaranteed!
-    //{
-    //    if (itemsTypes.Contains(item.GetType()))
-    //    {
-    //        foreach (CellInventory cell in cells)
-    //        {
-    //            if (cell.ItemType == item.GetType())
-    //            {
-    //                cell.Subtract();
-    //                if (cell.IsEmpty) itemsTypes.Remove(item.GetType());
-    //                return;
-    //            }
-    //        }
-    //    }
-    //}
+    public void Remove(Item item)
+    {
+        if (itemsTypes.Contains(item.ItemData.Type))
+        {
+            foreach (CellInventory cell in Cells)
+            {
+                if (cell.Data.Type == item.ItemData.Type)
+                {
+                    cell.Clear();
+                    // if (cell.IsEmpty) itemsTypes.Remove(item.GetType()); Need to rebuild logic.
+                    return;
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Removes item from inventory.
+    /// </summary>
+    public void ClearCell(int indexOfCell)
+    {
+        Cells[indexOfCell].Clear();
+        // itemsTypes.Remove(item.GetType()); Need to rebuild logic.
+    }
 
     #region Unused Swap
     /// <summary>
@@ -148,13 +167,13 @@ public class Inventory
         return Cells[index];
     }
 
-    public bool DecreaseAmount(int indexOfCell, int amount)
-    {
-        return Cells[indexOfCell].DecreaseAmount(amount);
-    }
-
     private void CheckInventoryData(InventoryData inventoryData)
     {
         if (inventoryData.Cells.Length <= 0) throw new ArgumentException("Wrong length of Inventory!");
+    }
+
+    private void Handle_ItemDeleteButtonOnClick(int indexOfCell)
+    {
+        ClearCell(indexOfCell);
     }
 }
