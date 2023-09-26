@@ -3,6 +3,7 @@ using UnityEngine;
 public class WorldToUi : MonoBehaviour
 {
     [SerializeField] private Transform target;
+    [SerializeField] private float offsetY;
 
     private Camera cam;
 
@@ -14,5 +15,10 @@ public class WorldToUi : MonoBehaviour
     private void Update()
     {
         transform.position = cam.WorldToScreenPoint(target.position);
+        transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y + offsetY,
+            transform.position.z
+            );
     }
 }
