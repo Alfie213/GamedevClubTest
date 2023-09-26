@@ -1,18 +1,24 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Header("Enemy prefabs")]
+    [Header("Enemy settings")]
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private int enemyHp;
     
     [Header("SpawnArea cornerPoints")]
     [SerializeField] private Transform cornerPoint1;
     [SerializeField] private Transform cornerPoint2;
-    
-    [Header("SpawnParent")]
-    [SerializeField] private Transform spawnParent;
+
+    [Header("Hp bar")]
+    [SerializeField] private GameObject hpBarSliderPrefab;
+    [SerializeField] private float hpBarOffsetY;
+
+    [Header("SpawnParents")]
+    [SerializeField] private Transform hpBarSpawnParent;
+    [SerializeField] private Transform monsterSpawnParent;
     
     private Rect spawnArea;
     
@@ -35,8 +41,14 @@ public class MonsterSpawner : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnArea.RandomPoint(),
-                Quaternion.identity, spawnParent);
+            GameObject enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnArea.RandomPoint(),
+                Quaternion.identity, monsterSpawnParent);
+
+            GameObject hpBar = Instantiate(hpBarSliderPrefab, hpBarSpawnParent);
+            hpBar.GetComponent<HealthBar>().SetMaxHealth(enemyHp);
+            hpBar.GetComponent<HealthBar>().SetTrackableHealth(enemy.GetComponent<Enemy>().Health);
+            hpBar.GetComponent<WorldToUi>().SetTarget(enemy.transform);
+            hpBar.GetComponent<WorldToUi>().SetOffsetY(hpBarOffsetY);
         }
     }
 }

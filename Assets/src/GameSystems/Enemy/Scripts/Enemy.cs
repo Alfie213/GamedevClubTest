@@ -4,6 +4,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Collider2D), typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
+    public EnemyHealth Health => health;
+    
     [SerializeField] private int maxHp;
     [SerializeField] private float speed;
     

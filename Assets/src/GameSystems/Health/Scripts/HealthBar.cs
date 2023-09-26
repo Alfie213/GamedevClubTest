@@ -5,6 +5,8 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Gradient gradient;
 
+    private HealthBase trackableHealth;
+    
     private Slider slider;
     private Image fill;
 
@@ -14,6 +16,12 @@ public class HealthBar : MonoBehaviour
         fill = GetComponentInChildren<Image>();
     }
 
+    public void SetTrackableHealth(HealthBase health)
+    {
+        trackableHealth = health;
+        trackableHealth.OnHpChange += SetHealth;
+    }
+    
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
@@ -21,7 +29,7 @@ public class HealthBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth(int health)
+    private void SetHealth(int health)
     {
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);

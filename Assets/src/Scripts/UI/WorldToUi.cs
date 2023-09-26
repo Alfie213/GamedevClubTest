@@ -21,4 +21,14 @@ public class WorldToUi : MonoBehaviour
             transform.position.z
             );
     }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+
+    public void SetOffsetY(float offset)
+    {
+        offsetY = offset;
+    }
 }
