@@ -19,19 +19,30 @@ public class HealthBar : MonoBehaviour
     public void SetTrackableHealth(HealthBase health)
     {
         trackableHealth = health;
-        trackableHealth.OnHpChange += SetHealth;
+        trackableHealth.OnHpChange += Handle_OnHpChange;
+        trackableHealth.OnDeath += Handle_OnDeath;
     }
     
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(int value)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        slider.maxValue = value;
+        slider.value = value;
         fill.color = gradient.Evaluate(1f);
     }
 
-    private void SetHealth(int health)
+    private void SetHealth(int value)
     {
-        slider.value = health;
+        slider.value = value;
         fill.color = gradient.Evaluate(slider.normalizedValue);
+    }
+
+    private void Handle_OnHpChange(int value)
+    {
+        SetHealth(value);
+    }
+
+    private void Handle_OnDeath()
+    {
+        Destroy(gameObject);
     }
 }

@@ -25,6 +25,16 @@ public class Enemy : MonoBehaviour
         movement = new NavMeshMovement(speed, GetComponent<NavMeshAgent>(), stoppingDistance, this);
     }
 
+    private void OnEnable()
+    {
+        health.OnDeath += Handle_OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        health.OnDeath -= Handle_OnDeath;
+    }
+
     private void InitCollider()
     {
         col = GetComponent<Collider2D>();
@@ -39,8 +49,12 @@ public class Enemy : MonoBehaviour
         }
         else if (other.TryGetComponent<Projectile>(out Projectile projectile))
         {
-            Debug.Log(projectile.Damage);
             health.GetDamage(projectile.Damage);
         }
+    }
+
+    private void Handle_OnDeath()
+    {
+        Destroy(gameObject);
     }
 }

@@ -11,7 +11,7 @@ public class EnemyHealth : HealthBase
     
     protected override void Death()
     {
-        Debug.Log("Enemy's death");
+        base.Death();
         EventBus.EnemyDeath.Publish(enemyPosition);
     }
 }

@@ -3,6 +3,7 @@ using System;
 public abstract class HealthBase : IDamageable
 {
     public Action<int> OnHpChange;
+    public Action OnDeath;
     
     private int maxHp;
     private int currentHp;
@@ -12,8 +13,11 @@ public abstract class HealthBase : IDamageable
         this.maxHp = maxHp;
         currentHp = maxHp;
     }
-    
-    protected abstract void Death();
+
+    protected virtual void Death()
+    {
+        OnDeath?.Invoke();
+    }
     
     public void GetDamage(int damage)
     {

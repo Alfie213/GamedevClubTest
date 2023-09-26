@@ -8,6 +8,7 @@ public class PlayerHealth : HealthBase
 
     protected override void Death()
     {
+        base.Death();
         Debug.LogWarning("Player's death!");
     }
 }
