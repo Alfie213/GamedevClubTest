@@ -8,6 +8,8 @@ public abstract class HealthBase : IDamageable
     private int maxHp;
     private int currentHp;
 
+    private bool isDead;
+
     protected HealthBase(int maxHp)
     {
         this.maxHp = maxHp;
@@ -24,7 +26,10 @@ public abstract class HealthBase : IDamageable
         currentHp -= damage;
         OnHpChange?.Invoke(currentHp);
         
-        if (currentHp <= 0)
+        if (currentHp <= 0 && !isDead)
+        {
+            isDead = true;
             Death();
+        }
     }
 }
