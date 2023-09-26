@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -44,9 +45,14 @@ public class NavMeshMovement
     {
         while (true)
         {
-            agent.destination = target.position;
-            // if (CheckDestinationReached())
-            //     yield break;
+            try
+            {
+                agent.destination = target.position;
+            }
+            catch(Exception exception)
+            {
+                yield break;
+            }
 
             yield return Delay;
         }
